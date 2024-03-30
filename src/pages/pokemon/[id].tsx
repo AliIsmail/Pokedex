@@ -1,7 +1,16 @@
 import { useRouter } from "next/router";
 import axios from "axios";
+import { GetServerSidePropsContext } from "next";
 
-const PokemonPage = ({ pokemon }) => {
+interface Pokemon {
+  name: string
+}
+
+interface PokemonPageProps {
+  pokemon: Pokemon
+}
+
+const PokemonPage = ({ pokemon }: PokemonPageProps) => {
   // Your component logic and JSX here
   return (
     <div>
@@ -11,8 +20,8 @@ const PokemonPage = ({ pokemon }) => {
   );
 };
 
-export async function getServerSideProps(context) {
-  const { id } = context.params;
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { id } = context.params as { id: string };
   let pokemon = {};
 
   try {

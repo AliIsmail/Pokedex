@@ -1,7 +1,17 @@
 import axios from "axios";
 import Link from "next/link";
 
-export default function Home({ pokemons }) {
+interface Pokemon {
+  name: string;
+  url: string;
+}
+
+interface HomeProps {
+  pokemons: Pokemon[];
+}
+
+
+export default function Home({ pokemons }: HomeProps) {
   return (
     <div>
       <h1>Pokédex</h1>
@@ -9,7 +19,7 @@ export default function Home({ pokemons }) {
         {pokemons.map((pokemon, index) => (
           <li key={index}>
             <Link href={`/pokemon/${index + 1}`}>
-              <a>{pokemon.name}</a>
+              {pokemon.name}
             </Link>
           </li>
         ))}
